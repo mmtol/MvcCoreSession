@@ -18,6 +18,8 @@ namespace MvcCoreSession.Controllers
                 else if (accion.ToLower() == "mostrar")
                 {
                     //recuperamos los datos de session
+                    ViewData["Nombre"] = HttpContext.Session.GetString("nombre");
+                    ViewData["Hora"] = HttpContext.Session.GetString("hora");
                 }
             }
             return View();
