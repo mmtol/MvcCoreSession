@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<h1>Ejemplos session</h1>
+
+<ul>
+    <li>
+        <a asp-controller="EjemploSession" asp-action="SessionSimple">Session Simple</a>
+    </li>
+    <li>
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaBytes">Session Mascota Bytes</a>
+    </li>
+    <li>
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaColectionBytes">Session Mascota Colection Bytes</a>
+    </li>
+</ul>
+
+<h2>Session simple</h2>
+<div style="background-color:lightblue">
+    <h3>Nombre: @Context.Session.GetString("nombre")</h3>
+    <h3>Hora: @Context.Session.GetString("hora")</h3>
+</div>
+
+@if (@Context.Session.GetString("Mascota") != null)
+{
+    <h2>Session Mascota</h2>
+    <div style="background-color:lightgreen">
+        <h3>Mascota: @Context.Session.Get("Mascota")</h3>
+    </div>
 }
