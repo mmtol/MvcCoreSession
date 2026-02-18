@@ -4,6 +4,11 @@ namespace MvcCoreSession.Controllers
 {
     public class EjemploSessionController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult SessionSimple(string accion)
         {
             if (accion != null)
