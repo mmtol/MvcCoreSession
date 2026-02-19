@@ -7,9 +7,17 @@ namespace MvcCoreSession.Controllers
 {
     public class EjemploSessionController : Controller
     {
+        private HelperSessionContextAccessor helper;
+
+        public EjemploSessionController(HelperSessionContextAccessor helper)
+        {
+            this.helper = helper;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            List<Mascota> mascotas = helper.GetMascotasSession();
+            return View(mascotas);
         }
 
         public IActionResult SessionSimple(string accion)
@@ -194,6 +202,7 @@ namespace MvcCoreSession.Controllers
                     };
 
                     HttpContext.Session.SetObject("MascotasGeneric", mascotas);
+                    ViewData["Mensaje"] = "Mascotas almacenadas en Session";
                 }
                 else if (accion.ToLower() == "mostrar")
                 {

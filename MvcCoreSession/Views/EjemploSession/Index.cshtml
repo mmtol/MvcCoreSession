@@ -1,4 +1,4 @@
-﻿<h1>Ejemplos session</h1>
+﻿@model List<Mascota>
 
 @{
     byte[] data = Context.Session.Get("Mascota");
@@ -22,6 +22,7 @@
     Mascota mascotaGeneric = Context.Session.GetObject<Mascota>("MascotaGeneric");
 }
 
+<h1>Ejemplos session</h1>
 <ul>
     <li>
         <a asp-controller="EjemploSession" asp-action="SessionSimple">Session Simple</a>
@@ -43,11 +44,42 @@
     </li>
 </ul>
 
-<h2>Session simple</h2>
-<div style="background-color:lightblue">
-    <h3>Nombre: @Context.Session.GetString("nombre")</h3>
-    <h3>Hora: @Context.Session.GetString("hora")</h3>
-</div>
+<hr/>
+
+@if (Model != null)
+{
+    <h1>Mascotas Helper</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Mascota m in Model)
+            {
+                <tr>
+                    <td>@m.Nombre</td>
+                    <td>@m.Raza</td>
+                    <td>@m.Edad</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+}
+
+@if (Context.Session.GetString("nombre") != null)
+{
+    <h2>Session simple</h2>
+    <div style="background-color:lightblue">
+        <h3>Nombre: @Context.Session.GetString("nombre")</h3>
+        <h3>Hora: @Context.Session.GetString("hora")</h3>
+    </div>
+}
 
 @if (mascota != null)
 {
