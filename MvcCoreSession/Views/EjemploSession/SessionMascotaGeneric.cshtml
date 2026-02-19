@@ -1,0 +1,21 @@
+﻿@{
+    Mascota mascota = ViewData["MascotaGeneric"] as Mascota;
+}
+
+<h1>Session Mascota Generic</h1>
+
+<h3>@ViewData["Mensaje"]</h3>
+
+<p>
+    <a asp-controller="EjemploSession" asp-action="SessionMascotaGeneric" asp-route-accion="almacenar">Almacenar</a>
+</p>
+<p>
+    <a asp-controller="EjemploSession" asp-action="SessionMascotaGeneric" asp-route-accion="mostrar">Mostrar</a>
+</p>
+
+@if (mascota != null)
+{
+    <h2>Nombre: @mascota.Nombre</h2>
+    <h2>Raza: @mascota.Raza</h2>
+    <h2>Edad: @mascota.Edad</h2>
+}

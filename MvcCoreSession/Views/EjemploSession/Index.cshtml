@@ -1,5 +1,27 @@
 ﻿<h1>Ejemplos session</h1>
 
+@{
+    byte[] data = Context.Session.Get("Mascota");
+    Mascota mascota = null;
+    if ((Context.Session.Get("Mascota")) != null)
+    {
+        mascota = (Mascota)HelperBinarySession.ByteToObject(data);
+    }
+}
+
+@{
+    string dataJson = Context.Session.GetString("json");
+    Mascota mascotaJson = null;
+    if ((Context.Session.Get("json")) != null)
+    {
+        mascotaJson = HelperJsonSession.DeserializeObject<Mascota>(dataJson);
+    }
+}
+
+@{
+    Mascota mascotaGeneric = Context.Session.GetObject<Mascota>("MascotaGeneric");
+}
+
 <ul>
     <li>
         <a asp-controller="EjemploSession" asp-action="SessionSimple">Session Simple</a>
@@ -10,6 +32,15 @@
     <li>
         <a asp-controller="EjemploSession" asp-action="SessionMascotaColectionBytes">Session Mascota Colection Bytes</a>
     </li>
+    <li>
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaJson">Session Mascota Json</a>
+    </li>
+    <li>
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaGeneric">Session Mascota Generic</a>
+    </li>
+    <li>
+        <a asp-controller="EjemploSession" asp-action="SessionMascotaColectionGeneric">Session Mascota Colection Generic</a>
+    </li>
 </ul>
 
 <h2>Session simple</h2>
@@ -18,10 +49,26 @@
     <h3>Hora: @Context.Session.GetString("hora")</h3>
 </div>
 
-@if (@Context.Session.GetString("Mascota") != null)
+@if (mascota != null)
 {
     <h2>Session Mascota</h2>
     <div style="background-color:lightgreen">
-        <h3>Mascota: @Context.Session.Get("Mascota")</h3>
+        <h3>@mascota.Nombre, @mascota.Raza, @mascota.Edad</h3>
+    </div>
+}
+
+@if (mascotaJson != null)
+{
+    <h2>Session Mascota Json</h2>
+    <div style="background-color:lightcoral">
+        <h3>@mascotaJson.Nombre, @mascotaJson.Raza, @mascotaJson.Edad</h3>
+    </div>
+}
+
+@if (mascotaGeneric != null)
+{
+    <h2>Session Mascota Generic</h2>
+    <div style="background-color:lightyellow">
+        <h3>@mascotaGeneric.Nombre, @mascotaGeneric.Raza, @mascotaGeneric.Edad</h3>
     </div>
 }

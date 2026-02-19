@@ -1,0 +1,35 @@
+﻿@model List<Mascota>
+
+<h1>Session Mascota Colection Generic</h1>
+
+<p>
+    <a asp-controller="EjemploSession" asp-action="SessionMascotaColectionGeneric" asp-route-accion="almacenar">Almacenar</a>
+</p>
+<p>
+    <a asp-controller="EjemploSession" asp-action="SessionMascotaColectionGeneric" asp-route-accion="mostrar">Mostrar</a>
+</p>
+
+<h2>@ViewData["Mensaje"]</h2>
+
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Edad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Mascota mascota in Model)
+            {
+                <tr>
+                    <td>@mascota.Nombre</td>
+                    <td>@mascota.Raza</td>
+                    <td>@mascota.Edad</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
